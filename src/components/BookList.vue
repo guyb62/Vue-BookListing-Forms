@@ -9,13 +9,11 @@
       Filtered Books By Ownership
     </h2>
     <select v-model="holding">
+      <option v-for="filter in filters">{{ filter }}</option>
+    </select>
     <ul>
       <book-item v-for='book in filteredBooks ' :key='book.id' :book='book'></book-item>
     </ul>
-    <option v-for="filter in filters" :key="filter.$props">
-     {{ filter }}
-    </option>
-    </select>
     <br><hr>
     <book-form @addBook='appendBook'></book-form>
   </div>
@@ -52,7 +50,8 @@ export default {
   },
   methods: {
     appendBook(bookData) {
-      this.books.push({ title: bookData.bookTitle, author: bookData.bookAuthor, finishedReading: bookData.finishedReading });
+      this.books.push({ title: bookData.bookTitle, author: bookData.bookAuthor, finishedReading: bookData.finishedReading,
+      ownership: bookData.ownership });
     }
   }
 };
